@@ -1,0 +1,34 @@
+{
+  "name": "eol-dependencies-test-app",
+  "version": "1.0.0",
+  "description": "A test application with intentionally outdated dependencies for testing EOL detection and upgrade agents",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest"
+  },
+  "keywords": ["test", "eol", "dependencies", "outdated"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "3.21.2",
+    "lodash": "3.10.1",
+    "moment": "2.10.6",
+    "request": "2.88.0",
+    "body-parser": "1.15.2",
+    "axios": "0.18.0",
+    "mongoose": "4.13.20",
+    "jquery": "2.2.4",
+    "bootstrap": "3.3.7",
+    "async": "1.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "1.19.4",
+    "jest": "24.9.0"
+  },
+  "engines": {
+    "node": "10.x",
+    "npm": "6.x"
+  }
+}

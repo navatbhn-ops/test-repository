@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOL Dependencies Test App</title>
+    <!-- Using old Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .user-card {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .alert-warning {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">EOL Dependencies Test App</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> This application uses intentionally outdated dependencies for testing purposes.
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Users List</h3>
+            </div>
+            <div class="panel-body">
+                <div id="users-list">
+                    <p class="text-muted">Loading users...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Outdated Dependencies</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li><strong>jQuery:</strong> 2.2.4 (Old version)</li>
+                    <li><strong>Bootstrap:</strong> 3.3.7 (Current: 5.x)</li>
+                    <li><strong>Express:</strong> 3.21.2 (Current: 4.x/5.x)</li>
+                    <li><strong>Moment.js:</strong> 2.10.6 (Deprecated)</li>
+                    <li><strong>Request:</strong> 2.88.0 (Deprecated)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Using old jQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- Using old Bootstrap 3.3.7 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Fetch users from API
+            $.ajax({
+                url: '/api/users',
+                method: 'GET',
+                success: function(users) {
+                    var usersList = $('#users-list');
+                    usersList.empty();
+                    
+                    if (users.length === 0) {
+                        usersList.append('<p class="text-muted">No users found.</p>');
+                        return;
+                    }
+                    
+                    users.forEach(function(user) {
+                        var userCard = $('<div class="user-card">');
+                        userCard.append('<h4>' + user.name + '</h4>');
+                        userCard.append('<p><strong>ID:</strong> ' + user.id + '</p>');
+                        userCard.append('<p><strong>Created:</strong> ' + user.createdAt + ' (' + user.daysAgo + ' days ago)</p>');
+                        usersList.append(userCard);
+                    });
+                },
+                error: function() {
+                    $('#users-list').html('<p class="text-danger">Failed to load users.</p>');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
